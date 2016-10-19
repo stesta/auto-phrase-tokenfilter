@@ -110,10 +110,10 @@ public class AutoPhrasingQParserPlugin extends QParserPlugin implements Resource
   }
 	
   private String autophrase( String input ) throws IOException {
-    WhitespaceTokenizer wt = new WhitespaceTokenizer(org.apache.lucene.util.Version.LUCENE_45,  new StringReader( input ));
+    WhitespaceTokenizer wt = new WhitespaceTokenizer(org.apache.lucene.util.Version.LUCENE_4_10_3,  new StringReader( input ));
     TokenStream ts = wt;
     if (ignoreCase) {
-      ts = new LowerCaseFilter(org.apache.lucene.util.Version.LUCENE_45, wt );
+      ts = new LowerCaseFilter(org.apache.lucene.util.Version.LUCENE_4_10_3, wt );
     }
     AutoPhrasingTokenFilter aptf = new AutoPhrasingTokenFilter( ts, phraseSets, false );
     aptf.setReplaceWhitespaceWith( new Character( replaceWhitespaceWith ) );
@@ -143,10 +143,10 @@ public class AutoPhrasingQParserPlugin extends QParserPlugin implements Resource
     if (files.size() > 0) {
       // default stopwords list has 35 or so words, but maybe don't make it that
       // big to start
-      words = new CharArraySet(org.apache.lucene.util.Version.LUCENE_45, files.size() * 10, ignoreCase);
+      words = new CharArraySet(org.apache.lucene.util.Version.LUCENE_4_10_3, files.size() * 10, ignoreCase);
       for (String file : files) {
         List<String> wlist = getLines(loader, file.trim());
-    	words.addAll(StopFilter.makeStopSet(org.apache.lucene.util.Version.LUCENE_45, wlist, ignoreCase));
+    	words.addAll(StopFilter.makeStopSet(org.apache.lucene.util.Version.LUCENE_4_10_3, wlist, ignoreCase));
       }
     }
     return words;
